@@ -1,0 +1,31 @@
+{
+  "name": "yamlconf",
+  "version": "0.0.1",
+  "description": "An alternative approach to the application configuration, with yaml and .env.",
+  "main": "yamlconf.js",
+  "scripts": {
+    "coverage": "cat ./coverage/lcov.info | ./node_modules/.bin/coveralls",
+    "lint": "./node_modules/.bin/eslint $(find . -name '*.js' -path './yamlconf.js' -o -path './test/*')",
+    "test": "./node_modules/istanbul/lib/cli.js cover ./node_modules/.bin/_mocha -- ./test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaroslav-kubicek/yamlconf.git"
+  },
+  "keywords": [
+    "yaml",
+    "configuration",
+    ".env"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jaroslav-kubicek/yamlconf/issues"
+  },
+  "homepage": "https://github.com/jaroslav-kubicek/yamlconf#readme",
+  "devDependencies": {
+    "eslint": "^2.5.1",
+    "istanbul": "^0.4.2",
+    "mocha": "^2.4.5"
+  }
+}
