@@ -27,5 +27,9 @@
     "eslint": "^2.5.1",
     "istanbul": "^0.4.2",
     "mocha": "^2.4.5"
+  },
+  "dependencies": {
+    "dotenv": "^2.0.0",
+    "yaml": "^0.3.0"
   }
 }
