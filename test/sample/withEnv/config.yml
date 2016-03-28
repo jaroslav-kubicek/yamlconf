@@ -1,0 +1,4 @@
+mongo: process.env.MONGO
+settings:
+  cache: false
+  prefix: 'pre_'

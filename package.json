@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/jaroslav-kubicek/yamlconf#readme",
   "devDependencies": {
+    "chai": "^3.5.0",
     "eslint": "^2.5.1",
     "istanbul": "^0.4.2",
     "mocha": "^2.4.5"

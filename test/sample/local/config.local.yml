@@ -1,0 +1,4 @@
+redis: 'redis'
+lists:
+ - users
+ - accounts

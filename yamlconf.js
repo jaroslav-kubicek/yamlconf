@@ -5,24 +5,28 @@ const fs = require('fs');
 const yaml = require('js-yaml');
 
 const yamlConf = function (options) {
+  if (typeof options === 'string') {
+    options = {path: options};
+  }
+
   options = options || {};
 
   const defaults = {
     dotenv: {silent: true, path: './.env'},
-    filepath: './config.yml',
-    localConfig: false,
-    loadToProcess: false
+    path: './config.yml',
+    loadToProcess: false,
+    localConfig: false
   };
 
   options = Object.assign({}, defaults, options);
 
   dotenv.load(options.dotenv);
 
-  if (!fs.existsSync(options.filepath)) {
-    throw new Error(`Config file not found: ${options.filepath}`);
+  if (!fs.existsSync(options.path)) {
+    throw new Error(`Config file not found: ${options.path}`);
   }
 
-  let config = _loadConfig(options.filepath);
+  let config = _loadConfig(options.path);
 
   // if localConfig specified,
   if (options.localConfig) {
@@ -54,11 +58,11 @@ const yamlConf = function (options) {
 /**
  * load config file and parse it
  *
- * @param {String} filepath
+ * @param {String} path
  * @returns {*}
  */
-const _loadConfig = function (filepath) {
-  const rawConfig = fs.readFileSync(filepath, {encoding: 'utf-8'});
+const _loadConfig = function (path) {
+  const rawConfig = fs.readFileSync(path, {encoding: 'utf-8'});
   const pattern = /process\.env\.(\w+)/g;
   const injected = rawConfig.replace(pattern, (match, envVar) => process.env[envVar]);
 
