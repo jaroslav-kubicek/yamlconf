@@ -32,6 +32,6 @@
   },
   "dependencies": {
     "dotenv": "^2.0.0",
-    "yaml": "^0.3.0"
+    "js-yaml": "^3.5.5"
   }
 }
