@@ -63,7 +63,7 @@ but none of them actually conform with something I  would call *"good manners"*.
   
   In practice, you have `config.yml` and your CI tool (or developer) may add `config.local.yml` 
   during build process to successfully setup the application with desired configuration. 
-  **Important note here:** This custom local configuration file should't be tracked by VCS.
+  **Important note here:** This custom local configuration file shouldn't be tracked by VCS.
     
 - **You should be able to set credentials and secret keys easily 
 without exposing them in source code.**
