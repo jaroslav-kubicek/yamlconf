@@ -1,4 +1,7 @@
 # yamlconf
+[![Build Status](https://travis-ci.org/jaroslav-kubicek/yamlconf.svg?branch=master)](https://travis-ci.org/jaroslav-kubicek/yamlconf)
+[![Coverage Status](https://coveralls.io/repos/github/jaroslav-kubicek/yamlconf/badge.svg?branch=master)](https://coveralls.io/github/jaroslav-kubicek/yamlconf?branch=master)
+
 An alternative approach to the application configuration, with yaml and env variables.
 
 ## Getting started
