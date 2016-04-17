@@ -1,9 +1,9 @@
 # yamlconf
-An alternative approach to the application configuration, with yaml and .env.
+An alternative approach to the application configuration, with yaml and env variables.
 
 ## Getting started
 
-To start using this, simply require zamlconf function and call it:
+To start using this, simply require yamlconf function and call it:
 
 ```javascript
 const config = require('yamlconf')();
@@ -62,12 +62,12 @@ without exposing them in source code.
   
   
 - The philosophy behind yamlconf 
- should match with [*"The twelve-factor app"*](http://12factor.net/) methodology
+ should match with [*"The twelve-factor app"*](http://12factor.net/) methodology.
   
 
 **Why YAML and not JSON?**
 
-Because json is not IMHO simply the appropriate format for the configuration.
+IMHO because json is not simply the appropriate format for the configuration.
 For example:
 - It's too verbose and no human friendly.
 - You have to edit also an already existing line when adding new object property or array item.
