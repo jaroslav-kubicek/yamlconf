@@ -18,11 +18,16 @@ const yamlConf = function (options) {
     localConfig: {path: './config.local.yml', force: false}
   };
 
-  if (options.localConfig) {
-    options.localConfig = Object.assign({}, defaults.localConfig, options.localConfig);
-  }
+  for (let setting in defaults) {
+    let value = defaults[setting];
 
-  options = Object.assign({}, defaults, options);
+    if (typeof value === 'object' && !!value) {
+      options[setting] = Object.assign({}, value, options[setting]);
+      continue;
+    }
+
+    options[setting] = options[setting] || value;
+  }
 
   dotenv.load(options.dotenv);
 
