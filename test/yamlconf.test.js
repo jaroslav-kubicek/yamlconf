@@ -38,7 +38,7 @@ describe('yamlconf', function () {
   it('should merge local config with the main when specified', function () {
     const config = yamlconf({
       path: './test/sample/local/config.yml',
-      localConfig: './test/sample/local/config.local.yml'
+      localConfig: {path: './test/sample/local/config.local.yml'}
     });
 
     expect(config).to.be.an('object').with.keys(['lists', 'redis', 'settings']);
@@ -54,5 +54,35 @@ describe('yamlconf', function () {
     expect(config.apiLimit).to.be.equal(150);
     expect(process.config.apiLimit).to.be.equal(config.apiLimit);
     expect(process.config).to.include.keys(['apiLimit', 'mongo']);
+  });
+
+  it('should fail when loading non-existing config', function () {
+    try {
+      yamlconf({path: './test/nonexsting/config.yml'});
+    } catch (e) {
+      expect(e).to.be.instanceOf(Error);
+      expect(e.message).to.contain('Config file not found');
+      return;
+    }
+
+    throw new Error('Should failed!');
+  });
+
+  it('should fail when loading required non-existing local config', function () {
+    try {
+      yamlconf({
+        path: './test/sample/basic/simpleConfig.yml',
+        localConfig: {
+          force: true,
+          path: './test/sample/basic/config.local.yml'
+        }
+      });
+    } catch (e) {
+      expect(e).to.be.instanceOf(Error);
+      expect(e.message).to.contain('Local config was specified, but not found');
+      return;
+    }
+
+    throw new Error('Should failed!');
   });
 });

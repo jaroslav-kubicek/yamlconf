@@ -15,8 +15,12 @@ const yamlConf = function (options) {
     dotenv: {silent: true, path: './.env'},
     path: './config.yml',
     loadToProcess: false,
-    localConfig: false
+    localConfig: {path: './config.local.yml', force: false}
   };
+
+  if (options.localConfig) {
+    options.localConfig = Object.assign({}, defaults.localConfig, options.localConfig);
+  }
 
   options = Object.assign({}, defaults, options);
 
@@ -28,15 +32,19 @@ const yamlConf = function (options) {
 
   let config = _loadConfig(options.path);
 
-  // if localConfig specified,
+  // override values with local config if specified
   if (options.localConfig) {
-    if (!fs.existsSync(options.localConfig)) {
+    const isLocalConfig = fs.existsSync(options.localConfig.path);
+
+    if (!isLocalConfig && options.localConfig.force) {
       throw new Error(`Local config was specified, but not found: ${options.localConfig}`);
     }
 
-    const localConfig = _loadConfig(options.localConfig);
+    if (isLocalConfig) {
+      const localConfig = _loadConfig(options.localConfig.path);
 
-    config = Object.assign({}, config, localConfig);
+      config = Object.assign({}, config, localConfig);
+    }
   }
 
   if (!options.loadToProcess) {
