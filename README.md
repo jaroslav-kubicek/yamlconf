@@ -12,7 +12,31 @@ To start using this, simply require yamlconf function and call it:
 const config = require('yamlconf')();
 ```
 
-It will try to load configuration defined in `./config.yaml` file.
+It will load configuration defined in `./config.yml` file.
+
+Also, it will look for `./config.local.yml` file and if it's found, 
+it will merge values with normal config, local values taking precedence.
+
+## Configuration
+
+Pass the path to the config file as a string:
+
+```javascript
+const config = require('yamlconf')('./path/to/config.yml');
+```
+
+Pass the configuration object for more 
+
+| Property | Meaning | Defaults to |
+| ---- | ---- | --- |
+| path | filepath to config | ./config.yml |
+| loadToProcess | when it's true, config will be available globally in process.config | false
+| dotenv | configuration for `.env` file |  |
+| dotenv.path | filepath to `.env` file | ./env |
+| dotenv.silent | should not warn if `.env` file is missing | true |
+| localConfig | configuration object for local config |  |
+| localConfig.path | path to local config | './config.local.yml' |
+| localConfig.force | specify if localConfig should be always loaded, fails if doesn't exists | false
 
 ## Reasons to implement this
 
@@ -23,7 +47,7 @@ you may know [node-yaml-config](https://www.npmjs.com/package/node-yaml-config)
 or [yaml-config](https://www.npmjs.com/package/yaml-config), 
 but none of them actually conform with something I  would call *"good manners"*. What are they?
 
-- You should NOT define special blocks of configuration for each of your environments.
+- **You should NOT define special blocks of configuration for each of your environments.**
   If you do this, you may quickly end up with huge file containing something like this:
   ```
   dev-123-feature:
@@ -37,12 +61,12 @@ but none of them actually conform with something I  would call *"good manners"*.
   Instead, you should have just one config file
   and the values defined there can be overridden by "local" configuration if needed.
   
-  In practice, you have `config.yaml` and your CI tool (or developer) may add `config.local.yaml` 
+  In practice, you have `config.yml` and your CI tool (or developer) may add `config.local.yml` 
   during build process to successfully setup the application with desired configuration. 
   **Important note here:** This custom local configuration file should't be tracked by VCS.
     
-- You should be able to set credentials and secret keys easily 
-without exposing them in source code.
+- **You should be able to set credentials and secret keys easily 
+without exposing them in source code.**
 
   Environment variables suit the best for this - you can define them on the 
   fly and out of the scope of the application source code.
@@ -54,7 +78,7 @@ without exposing them in source code.
   REDIS=redis://yourhost:6379
   ```
   
-  and in `config.yaml`:
+  and in `config.yml`:
   ```
   services:
     redis: process.env.REDIS
