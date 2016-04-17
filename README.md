@@ -25,7 +25,7 @@ Pass the path to the config file as a string:
 const config = require('yamlconf')('./path/to/config.yml');
 ```
 
-Pass the configuration object for more 
+Pass the configuration object for more options:
 
 | Property | Meaning | Defaults to |
 | ---- | ---- | --- |
